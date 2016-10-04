@@ -8,7 +8,7 @@
 	<packaging>jar</packaging>
 
 	<name>mokous-web</name>
-	<url>http://www.mokous.com/</url>
+	<url>http://www.mokous.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
