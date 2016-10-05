@@ -42,7 +42,7 @@ public class LoggingFilter extends AbstractRequestLoggingFilterExt {
 
     private static final Map<String, Boolean> logRespMap = new HashMap<String, Boolean>();
     static {
-        logRespMap.put("/appchina-ios-backend/app/download.json", true);
+        logRespMap.put("/mokous-backend/app/download.json", true);
         logRespMap.put("/app/download.json", true);
     }
     public static final Set<String> INGORE_LOG_REQUESTMAPS = new HashSet<String>() {
@@ -199,7 +199,7 @@ public class LoggingFilter extends AbstractRequestLoggingFilterExt {
 
     @Override
     protected boolean isExcludeUri(String uri) {
-        if (uri.startsWith("/appchina-ios-backend/admin/") || uri.startsWith("/admin/")) {
+        if (uri.startsWith("/admin/")) {
             return true;
         }
         return false;

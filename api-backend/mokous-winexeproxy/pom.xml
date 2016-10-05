@@ -30,8 +30,18 @@
 			<version>3.4.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.sun</groupId>
+			<artifactId>deploy</artifactId>
+			<version>1.7.0_80</version>
+		</dependency>
+		<dependency>
 			<groupId>com.mokous</groupId>
 			<artifactId>mokous-web</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mokous</groupId>
+			<artifactId>mokous-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
