@@ -17,6 +17,7 @@ public class DbStatus {
     public static final int STATUS_DEL = StatusType.STATUS_DEL.getStatus();
     public static final String STATUS_COLUMN = "status";
     public static final String ID_COLUMN = "id";
+    public static final String STATUS_ALL_DESC = "all";
     public static final Map<String, String> STATUS = new LinkedHashMap<String, String>() {
         /**
          * 

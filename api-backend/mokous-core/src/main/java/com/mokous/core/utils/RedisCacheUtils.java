@@ -52,7 +52,7 @@ public class RedisCacheUtils {
             if (StringUtils.isEmpty(returnKey)) {
                 returnKey += key.toLowerCase();
             } else {
-                returnKey = returnKey + ":" + key.toLowerCase();
+                returnKey = returnKey + KEY_SPLITCHAR + key.toLowerCase();
             }
         }
         return returnKey;

@@ -3,7 +3,6 @@
 package com.mokous.web.action;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.codehaus.jackson.JsonGenerator;
@@ -27,7 +26,7 @@ public class WebDateObjectMapper extends ObjectMapper {
             @Override
             public void serialize(Date value, JsonGenerator jsonGenerator, SerializerProvider provider)
                     throws IOException, JsonProcessingException {
-                jsonGenerator.writeString(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(value));
+                jsonGenerator.writeString(String.valueOf(value.getTime()));
             }
         });
         this.setSerializerFactory(factory);

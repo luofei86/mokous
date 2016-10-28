@@ -1,0 +1,67 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:///${MOKOUS_WINEXEPROXY_DEPLOY_HOME}\conf\platform\mokous-winexeproxy\mokous_winexeproxy_biz.properties
+				</value>
+				<value>file:///${MOKOUS_WINEXEPROXY_DEPLOY_HOME}\conf\platform\mokous-winexeproxy\mokous_winexeproxy_db.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean name="ios-winexe-proxy-rediscachepoolconfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${mokous.winexeproxy.redis.cache.max.total}" />
+		<property name="maxIdle" value="${mokous.winexeproxy.redis.cache.max.idle}" />
+		<property name="maxWaitMillis" value="${mokous.winexeproxy.redis.cache.max.wait}" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+
+	<bean id="ios-winexe-proxy-rediscacheshardedpool" class="redis.clients.jedis.ShardedJedisPool">
+		<constructor-arg
+			type="org.apache.commons.pool2.impl.GenericObjectPoolConfig" ref="ios-winexe-proxy-rediscachepoolconfig">
+		</constructor-arg>
+		<constructor-arg type="java.util.List">
+			<list>
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg index="0"
+						value="${mokous.winexeproxy.redis.cache.ip}">
+					</constructor-arg>
+					<constructor-arg index="1"
+						value="${mokous.winexeproxy.redis.cache.port}">
+					</constructor-arg>
+					<constructor-arg index="2"
+						value="${mokous.winexeproxy.redis.cache.timeout}">
+					</constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg index="0"
+						value="${mokous.winexeproxy.redis.cache.ip1}">
+					</constructor-arg>
+					<constructor-arg index="1"
+						value="${mokous.winexeproxy.redis.cache.port1}">
+					</constructor-arg>
+					<constructor-arg index="2"
+						value="${mokous.winexeproxy.redis.cache.timeout}">
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.mokous.winexeproxy.service.impl"></context:component-scan>
+</beans>
+

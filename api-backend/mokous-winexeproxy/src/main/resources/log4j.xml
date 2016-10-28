@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE log4j:configuration PUBLIC
+  "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="mokous_winexeproxy" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File"
+			value="${MOKOUS_WINEXEPROXY_HOME}/logs/platform/ios-winexe-proxy/mokous_winexeproxy.log" />
+		<param name="Threshold" value="INFO" />
+		<param name="DatePattern" value="'.'yyyyMMdd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss:SSS} %p %t %c{1} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="mokous_winexeproxy_error" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File"
+			value="${MOKOUS_WINEXEPROXY_HOME}/logs/platform/mokous-winexeproxy/mokous_winexeproxy_error.log" />
+		<param name="Threshold" value="ERROR" />
+		<param name="DatePattern" value="'.'yyyyMMdd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss:SSS} %p %t %c{1} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="request_log" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File"
+			value="${MOKOUS_WINEXEPROXY_HOME}/logs/platform/mokous-winexeproxy/mokous_winexeproxy_request.log" />
+		<param name="Threshold" value="INFO" />
+		<param name="DatePattern" value="'.'yyyyMMdd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss:SSS} %p %t %c{1} - %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="mokous_winexeproxy_request" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="request_log" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="mokous_winexeproxy" />
+		<appender-ref ref="mokous_winexeproxy_error" />
+	</root>
+
+</log4j:configuration>
