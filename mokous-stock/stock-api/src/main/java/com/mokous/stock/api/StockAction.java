@@ -19,7 +19,7 @@ import com.mokous.web.model.ListWrapResp;
  */
 @Controller
 @RequestMapping("/stock/*")
-public class stockAction extends BaseAction {
+public class StockAction extends BaseAction {
     @RequestMapping(value = "/search.json")
     @ResponseBody
     protected ApiRespWrapper<ListWrapResp<StockInfo>> searchStockInfo(String keyword) {
