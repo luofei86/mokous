@@ -1,6 +1,6 @@
 // Copyright 2015 www.refanqie.com Inc. All Rights Reserved.
 
-package com.mokous.core.dto.account;
+package com.mokous.apple.core.dto.account;
 
 import java.util.HashMap;
 import java.util.Map;

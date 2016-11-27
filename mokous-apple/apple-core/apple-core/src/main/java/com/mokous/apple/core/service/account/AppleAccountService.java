@@ -1,8 +1,8 @@
 // Copyright 2015 www.refanqie.com Inc. All Rights Reserved.
 
-package com.mokous.core.service.account;
+package com.mokous.apple.core.service.account;
 
-import com.mokous.core.dto.account.AppleAccount;
+import com.mokous.apple.core.dto.account.AppleAccount;
 import com.mokous.core.service.AbsCommonDataService;
 import com.mokous.web.exception.ServiceException;
 

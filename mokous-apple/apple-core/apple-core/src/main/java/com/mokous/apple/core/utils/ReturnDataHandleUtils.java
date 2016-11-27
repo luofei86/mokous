@@ -1,6 +1,6 @@
 // Copyright 2015 www.refanqie.com Inc. All Rights Reserved.
 
-package com.mokous.core.utils;
+package com.mokous.apple.core.utils;
 
 import java.lang.reflect.Type;
 
@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mokous.core.cache.appleaccount.login.AuthActionResponse;
+import com.mokous.apple.core.cache.appleaccount.login.AuthActionResponse;
 import com.mokous.web.model.ApiRespWrapper;
 import com.mokous.web.model.ReturnDataHandle;
 import com.mokous.web.utils.GsonUtils;

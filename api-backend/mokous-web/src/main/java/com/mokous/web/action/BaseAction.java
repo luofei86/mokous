@@ -21,8 +21,8 @@ import com.mokous.web.utils.IPUtil;
  * @date 2016年10月4日
  * 
  */
-public class IosBaseAction {
-    private static final Logger log = Logger.getLogger(IosBaseAction.class);
+public class BaseAction {
+    private static final Logger log = Logger.getLogger(BaseAction.class);
 
     @ExceptionHandler(ServiceException.class)
     @ResponseBody

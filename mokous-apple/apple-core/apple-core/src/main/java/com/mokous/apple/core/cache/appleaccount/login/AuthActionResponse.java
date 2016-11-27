@@ -1,6 +1,6 @@
 // Copyright 2016-2016 www.mokous.com Inc. All Rights Reserved.
 
-package com.mokous.core.cache.appleaccount.login;
+package com.mokous.apple.core.cache.appleaccount.login;
 
 import java.io.Serializable;
 
