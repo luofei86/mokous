@@ -4,7 +4,7 @@ package com.mokous.stock.core.dto.info;
 
 import java.util.Date;
 
-import com.mokous.stock.core.dto.DbStatus;
+import com.mokous.core.dto.DbStatus;
 
 /**
  * @author luofei@appchina.com create date: Nov 23, 2016
@@ -17,6 +17,7 @@ public class StockInfo extends DbStatus {
     private static final long serialVersionUID = 6413399634096504535L;
     private String code;
     private String name;
+    private String namePy;
     private Date saleDate;
     private int securitiesMarketId;// 证券交易市场Id
     private float currentPrice;
@@ -59,5 +60,13 @@ public class StockInfo extends DbStatus {
 
     public void setSecuritiesMarketId(int securitiesMarketId) {
         this.securitiesMarketId = securitiesMarketId;
+    }
+
+    public String getNamePy() {
+        return namePy;
+    }
+
+    public void setNamePy(String namePy) {
+        this.namePy = namePy;
     }
 }

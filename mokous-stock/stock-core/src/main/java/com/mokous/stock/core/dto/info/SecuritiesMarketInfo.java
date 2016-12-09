@@ -2,7 +2,7 @@
 
 package com.mokous.stock.core.dto.info;
 
-import com.mokous.stock.core.dto.DbStatus;
+import com.mokous.core.dto.DbStatus;
 
 /**
  * @author luofei@appchina.com create date: Nov 24, 2016
