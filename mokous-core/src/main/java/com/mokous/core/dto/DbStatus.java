@@ -2,6 +2,7 @@
 
 package com.mokous.core.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,7 +12,11 @@ import java.util.Map;
  * @date 2016年10月5日
  * 
  */
-public class DbStatus {
+public class DbStatus implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2548596565241111669L;
     public static final int STATUS_ALL = StatusType.STATUS_ALL.getStatus();
     public static final int STATUS_OK = StatusType.STATUS_OK.getStatus();
     public static final int STATUS_DEL = StatusType.STATUS_DEL.getStatus();
