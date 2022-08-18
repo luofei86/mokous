@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.mokous.core.dto.DbStatus;
+import com.mokous.core.dto.DbData;
 import com.mokous.core.dto.StatusType;
 import com.mokous.web.utils.GsonUtils;
 
@@ -193,8 +193,8 @@ public class ParameterUtils {
         if (StringUtils.isEmpty(value)) {
             return null;
         }
-        if (StringUtils.equalsIgnoreCase(value, String.valueOf(DbStatus.STATUS_ALL))
-                || (StringUtils.equalsIgnoreCase(DbStatus.STATUS_ALL_DESC, value))) {
+        if (StringUtils.equalsIgnoreCase(value, String.valueOf(DbData.STATUS_ALL))
+                || (StringUtils.equalsIgnoreCase(DbData.STATUS_ALL_DESC, value))) {
             return null;
         }
         return value;

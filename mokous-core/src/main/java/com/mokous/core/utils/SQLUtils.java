@@ -21,7 +21,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import com.mokous.core.dto.DbField.SELECT_ALL_KEY;
 import com.mokous.core.dto.DbField.UNSIGNED_INT;
 import com.mokous.core.dto.DbField.ZERO_ENABLE;
-import com.mokous.core.dto.DbStatus;
+import com.mokous.core.dto.DbData;
 import com.mokous.core.dto.StatusType;
 
 /**
@@ -296,7 +296,7 @@ public class SQLUtils {
                             && !BeanAnnotatiionUtils.isAnnotationPresent(obj.getClass(), pd.getName(),
                                     ZERO_ENABLE.class)) {
                         if (noIgnoreZeroField == null || !noIgnoreZeroField.contains(pd.getName())) {
-                            if (!StringUtils.equals(DbStatus.STATUS_COLUMN, pd.getName())) {
+                            if (!StringUtils.equals(DbData.STATUS_COLUMN, pd.getName())) {
                                 // status默认0 如果需要查状态为0的数据时，不要过滤，所以此处需要做一点处理 较为丑陋
                                 if (isZero(putObject)) {
                                     continue;
@@ -319,7 +319,7 @@ public class SQLUtils {
                         }
                     }
                     // 对于id字段，如果不大于0，不进查询条件
-                    if (StringUtils.equals(DbStatus.ID_COLUMN, pd.getName())) {
+                    if (StringUtils.equals(DbData.ID_COLUMN, pd.getName())) {
                         int value = Integer.valueOf(String.valueOf(putObject));
                         if (value <= 0) {
                             continue;
@@ -336,8 +336,8 @@ public class SQLUtils {
                     // check int attribute all value and String
                     // attribute all value
                     if (BeanAnnotatiionUtils.isAnnotationPresent(obj.getClass(), pd.getName(), SELECT_ALL_KEY.class)) {
-                        if (StringUtils.equalsIgnoreCase(String.valueOf(DbStatus.STATUS_ALL), putObject.toString())
-                                || StringUtils.equalsIgnoreCase(DbStatus.STATUS_ALL_DESC, putObject.toString())) {
+                        if (StringUtils.equalsIgnoreCase(String.valueOf(DbData.STATUS_ALL), putObject.toString())
+                                || StringUtils.equalsIgnoreCase(DbData.STATUS_ALL_DESC, putObject.toString())) {
                             continue;
                         }
                     }

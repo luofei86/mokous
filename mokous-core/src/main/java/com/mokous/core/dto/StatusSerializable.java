@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @date 2016年10月5日
  * 
  */
-public class StatusSerializable extends DbStatus implements Serializable {
+public class StatusSerializable extends DbData implements Serializable {
 
     /**
      * 

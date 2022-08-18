@@ -12,7 +12,7 @@ import java.util.Map;
  * @date 2016年10月5日
  * 
  */
-public class DbStatus implements Serializable {
+public class DbData implements Serializable {
     /**
      * 
      */

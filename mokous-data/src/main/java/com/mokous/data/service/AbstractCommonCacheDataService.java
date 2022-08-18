@@ -1,12 +1,11 @@
-// Copyright 2015 ios.appchina.com Inc. All Rights Reserved.
+// Copyright 2018 https://mokous.com Inc. All Rights Reserved.
 
-package com.mokous.core.service;
+package com.mokous.data.service;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,18 +20,19 @@ import org.apache.log4j.Logger;
 
 import redis.clients.jedis.ShardedJedisPool;
 
-import com.mokous.core.dto.DbKey;
 import com.mokous.core.dto.DbData;
+import com.mokous.core.dto.DbKey;
+import com.mokous.core.utils.CollectionUtils;
 import com.mokous.core.utils.RedisCacheUtils;
 import com.mokous.web.exception.ServiceException;
-import com.mokous.web.utils.CollectionUtils;
 
 /**
- * @author luofei@appchina.com (Your Name Here)
+ * @author mokous86@gmail.com create date: Feb 1, 2018
  *
  */
-public abstract class AbsCommonCacheDataService<G extends Serializable> extends AbsCommonDataService<G> {
-    private static final Logger log = Logger.getLogger(AbsCommonCacheDataService.class);
+public abstract class AbstractCommonCacheDataService<G extends DbData> extends AbstractCommonDataService<G> implements
+        CommonCacheDataService<G> {
+    private static final Logger log = Logger.getLogger(AbstractCommonCacheDataService.class);
 
     protected abstract ShardedJedisPool getSharedJedisPool();
 
@@ -40,12 +40,12 @@ public abstract class AbsCommonCacheDataService<G extends Serializable> extends 
         return log;
     }
 
-    /**
-     * ONLY RETURN LEGAL DATA
+    /*
+     * (non-Javadoc)
      * 
-     * @param id
-     * @return
+     * @see com.mokous.data.service.CommonCacheDataService#getData(int)
      */
+    @Override
     public G getData(int id) {
         List<G> datas = getData(new ArrayList<Integer>(Arrays.asList(id)));
         G g = datas.size() == 1 ? datas.get(0) : null;
@@ -57,6 +57,13 @@ public abstract class AbsCommonCacheDataService<G extends Serializable> extends 
         return g;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.mokous.data.service.CommonCacheDataService#getData(java.util.List)
+     */
+    @Override
     public List<G> getData(List<Integer> ids) {
         Map<String, Integer> keyIdMap = new LinkedHashMap<String, Integer>();
         List<G> ret = new ArrayList<G>();
@@ -104,15 +111,51 @@ public abstract class AbsCommonCacheDataService<G extends Serializable> extends 
 
     protected boolean canPutToCache(G g) {
         try {
-            return DbData.STATUS_OK == Integer.parseInt(BeanUtils.getProperty(g, "status"));
+            return DbData.STATUS_OK == Integer.parseInt(BeanUtils.getProperty(g, DbData.STATUS_COLUMN));
         } catch (Exception e) {
+            Class<?> clazz = g.getClass();
+            Class<?> superClazz = clazz.getSuperclass();
+            BeanInfo beanInfo;
+            try {
+                beanInfo = Introspector.getBeanInfo(clazz);
+            } catch (IntrospectionException e1) {
+                throw ServiceException.getInternalException("Cannot get status from value:" + g);
+            }
+            BeanInfo superBeanInfo = null;
+            try {
+                superBeanInfo = Introspector.getBeanInfo(superClazz);
+            } catch (IntrospectionException e1) {
+                throw ServiceException.getInternalException("Cannot get status from value:" + g);
+            }
+            PropertyDescriptor[] props = beanInfo.getPropertyDescriptors();
+            if (props == null) {
+                throw ServiceException.getInternalException("Cannot get status from value:" + g);
+            }
+            PropertyDescriptor[] superProps = superBeanInfo == null ? null : superBeanInfo.getPropertyDescriptors();
+            List<PropertyDescriptor> propList = new ArrayList<PropertyDescriptor>(Arrays.asList(props));
+            if (CollectionUtils.notEmptyAndNull(superProps)) {
+                propList.removeAll(Arrays.asList(superProps));
+            }
+            for (PropertyDescriptor prop : propList) {
+                String name = prop.getName();
+                try {
+                    Field f = clazz.getDeclaredField(name);
+                    f.setAccessible(true);
+                    if (f.isAnnotationPresent(DbKey.STATUS_KEY.class)) {
+                        return DbData.STATUS_OK == Integer.parseInt(f.get(g).toString());
+                    }
+                } catch (Exception e1) {
+                    throw ServiceException.getInternalException("Cannot get status from value:" + g);
+                }
+            }
             throw ServiceException.getInternalException("Cannot get status from value:" + g);
+
         }
     }
 
     protected int getIdFromG(G g) {
         try {
-            return Integer.parseInt(BeanUtils.getProperty(g, "id"));
+            return Integer.parseInt(BeanUtils.getProperty(g, DbData.ID_COLUMN));
         } catch (Exception e) {
             Class<?> clazz = g.getClass();
             Class<?> superClazz = clazz.getSuperclass();
