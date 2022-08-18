@@ -31,3 +31,8 @@ hs_err_pid*
 
 ###idea
 .idea/*
+.idea
+###mac
+.DS_Store
+
+*.iml
