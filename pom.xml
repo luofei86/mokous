@@ -9,8 +9,14 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <springversion>5.2.2.RELEASE</springversion>
+        <junitversion>4.12</junitversion>
+        <slf4j.version>1.7.0</slf4j.version>
+    </properties>
+
     <modules>
-        <module>dragon-base</module>
         <module>dragon-boat</module>
         <module>base-core</module>
         <module>base-web</module>

@@ -13,7 +13,7 @@
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springversion>5.2.2.RELEASE</springversion>
+        <springversion>[5.2.20,)</springversion>
         <junitversion>4.12</junitversion>
         <slf4j.version>1.7.0</slf4j.version>
     </properties>
